@@ -18,7 +18,6 @@ exports.getPhotos = async (req, res, next) => {
     }
 }
 
-//TODO: This
 exports.addPhoto = async (req, res, next) => {    
     try {
         const photo = await Photo.create(req.body);
@@ -87,12 +86,9 @@ exports.getPhoto = async (req, res, next) => {
     }
 }
 
-//TODO: This
 exports.deletePhoto = async (req, res, next) => {    
     try {
         const photo = await Photo.findById(req.params.id);
-
-        const photoToDelete = photo._id;
 
         if(!photo){
             return res.status(404).json({
@@ -101,24 +97,26 @@ exports.deletePhoto = async (req, res, next) => {
             });
         }
 
+        const photoToDelete = photo._id;
+
         await photo.remove();
 
-        // try {
-        //     const user = await axios.get(
-        //       `https://backyardhacks2020.wl.r.appspot.com/api/v1/users/${plant.userID}`
-        //     );
-        //     const newPlants = user.data.data[0].plants;
-        //     var index = newPlants.indexOf(plantToDelete.toString());
-        //     if (index !== -1) newPlants.splice(index, 1);
-        //     await axios.patch(
-        //       `https://backyardhacks2020.wl.r.appspot.com/api/v1/users/${plant.userID}`,
-        //       {
-        //         plants: newPlants,
-        //       }
-        //     );
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        try {
+            const user = await axios.get(
+              `https://hack-the-ne.appspot.com/api/v1/users/${photo.userID}`
+            );
+            const newPhotos = user.data.data[0].photos;
+            var index = newPhotos.indexOf(photoToDelete.toString());
+            if (index !== -1) newPhotos.splice(index, 1);
+            await axios.patch(
+              `https://hack-the-ne.appspot.com/api/v1/users/${photo.userID}`,
+              {
+                photos: newPhotos,
+              }
+            );
+        } catch (err) {
+            console.log(err);
+        }
 
         return res.status(200).json({
             success: true,
