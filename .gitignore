@@ -14,3 +14,4 @@
 # macOS
 .DS_Store
 server/__pycache__
+backend/env
