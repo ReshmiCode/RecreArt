@@ -2,7 +2,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 
-import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import ChallengeScreen from "../screens/ChallengeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
@@ -19,24 +18,8 @@ export default function BottomTabNavigator({ navigation }) {
       initialRouteName="Home"
       tabBar={(props) => <TabBar {...props} />}
     >
-      <BottomTab.Screen
-        name="Home"
-        component={ChallengeStack}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-code-working" />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-book" />
-          ),
-        }}
-      />
+      <BottomTab.Screen name="Home" component={ChallengeStack} />
+      <BottomTab.Screen name="Profile" component={ProfileScreen} />
     </BottomTab.Navigator>
   );
 }

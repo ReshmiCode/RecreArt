@@ -9,6 +9,8 @@ import {
   Left,
   Right,
   Icon,
+  Separator,
+  ListItem,
 } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -29,7 +31,24 @@ export default function HomeScreen(props) {
         style={{ flex: 1 }}
       >
         <Content padder>
-          <Text>hewwo</Text>
+          <Separator bordered>
+            <Text>Daily Global Challenge</Text>
+          </Separator>
+          <ListItem>
+            <Text>Caroline Aaron</Text>
+          </ListItem>
+          <ListItem last>
+            <Text>Lee Allen</Text>
+          </ListItem>
+          <Separator bordered>
+            <Text>Other Challenges</Text>
+          </Separator>
+          <ListItem>
+            <Text>Caroline Aaron</Text>
+          </ListItem>
+          <ListItem last>
+            <Text>Lee Allen</Text>
+          </ListItem>
         </Content>
       </LinearGradient>
     </Container>
