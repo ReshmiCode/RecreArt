@@ -22,10 +22,10 @@ HomeScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#fafafa",
   },
   contentContainer: {
-    paddingTop: 30,
+    paddingTop: 15,
   },
   getStartedText: {
     fontSize: 17,
