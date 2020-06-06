@@ -17,3 +17,4 @@ server/__pycache__
 backend/env
 server/node_modules
 /server/config
+server/config/config.env
