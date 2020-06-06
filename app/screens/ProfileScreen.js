@@ -9,8 +9,18 @@ import {
   Left,
   Right,
   Icon,
+  Button,
 } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
+import PortfolioCard from "../components/PortfolioCard";
+
+var styles = {
+  button: {
+    width: 370,
+    margin: 10,
+    justifyContent: "center",
+  },
+};
 
 export default function ProfileScreen(props) {
   return (
@@ -29,7 +39,22 @@ export default function ProfileScreen(props) {
         style={{ flex: 1 }}
       >
         <Content padder>
-          <Text>hewwo</Text>
+          <Body>
+            <Title>
+              <Text style={{ fontSize: 25, fontWeight: "bold" }}>Profile</Text>
+            </Title>
+          </Body>
+          <Body>
+            <Title>
+              <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+                Your Portfolio
+              </Text>
+            </Title>
+          </Body>
+          <PortfolioCard />
+          <Button style={styles.button}>
+            <Title> Logout </Title>
+          </Button>
         </Content>
       </LinearGradient>
     </Container>

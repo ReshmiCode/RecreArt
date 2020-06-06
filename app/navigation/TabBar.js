@@ -9,13 +9,13 @@ export default function TabBar({ state, navigation }) {
           active={state.index === 0}
           onPress={() => navigation.navigate("Home")}
         >
-          <Icon name="md-globe" />
+          <Icon name="ios-brush" />
         </Button>
         <Button
           active={state.index === 1}
           onPress={() => navigation.navigate("Profile")}
         >
-          <Icon name="md-clipboard" />
+          <Icon name="md-person" />
         </Button>
       </FooterTab>
     </Footer>
