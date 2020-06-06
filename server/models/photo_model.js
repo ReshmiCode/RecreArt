@@ -2,10 +2,9 @@ const mongoose = require('mongoose');
 
 const PhotoSchema = new mongoose.Schema({
     userID: {
-        type: String,
-        required: [true, 'Add a user']
+        type: String
     },
-    
+
     userPhoto : {
         type: String,
     },

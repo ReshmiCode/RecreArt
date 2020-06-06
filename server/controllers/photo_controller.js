@@ -23,21 +23,21 @@ exports.addPhoto = async (req, res, next) => {
     try {
         const photo = await Photo.create(req.body);
 
-        // try {
-        //     const user = await axios.get(
-        //       `https://backyardhacks2020.wl.r.appspot.com/api/v1/users/${plant.userID}`
-        //     );
-        //     const newPlants = user.data.data[0].plants;
-        //     newPlants.push(plant._id.toString());
-        //     await axios.patch(
-        //       `https://backyardhacks2020.wl.r.appspot.com/api/v1/users/${plant.userID}`,
-        //       {
-        //         plants: newPlants,
-        //       }
-        //     );
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        try {
+            const user = await axios.get(
+              `https://hack-the-ne.appspot.com/api/v1/users/${photo.userID}`
+            );
+            const newPhotos = user.data.data[0].photos;
+            newPhotos.push(photo._id.toString());
+            await axios.patch(
+              `https://hack-the-ne.appspot.com/api/v1/users/${photo.userID}`,
+              {
+                photos: newPhotos,
+              }
+            );
+        } catch (err) {
+            console.log(err);
+        }
 
         return res.status(201).json({
             success: true,
