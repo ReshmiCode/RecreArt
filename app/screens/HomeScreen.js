@@ -1,36 +1,23 @@
-import * as React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import React from "react";
+import { Container, Header, Content, Body, Title, Text } from "native-base";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function HomeScreen(props) {
   return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
+    <Container>
+      <Header>
+        <Body>
+          <Title>Feed</Title>
+        </Body>
+      </Header>
+      <LinearGradient
+        colors={["#6A9ECF", "#9FC0DF", "#c4ddf5"]}
+        style={{ flex: 1 }}
       >
-        <Text style={styles.getStartedText}>hewwo</Text>
-        <Button
-          onPress={() => props.navigation.navigate("Challenge")}
-          title="go"
-        />
-      </ScrollView>
-    </View>
+        <Content padder>
+          <Text>hewwo</Text>
+        </Content>
+      </LinearGradient>
+    </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fafafa",
-  },
-  contentContainer: {
-    paddingTop: 15,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    lineHeight: 24,
-    textAlign: "center",
-  },
-});

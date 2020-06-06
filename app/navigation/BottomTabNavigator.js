@@ -6,6 +6,7 @@ import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import ChallengeScreen from "../screens/ChallengeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import TabBar from "../navigation/TabBar";
 
 const BottomTab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -14,14 +15,19 @@ export default function BottomTabNavigator({ navigation }) {
   navigation.setOptions({ headerShown: false });
 
   return (
-    <BottomTab.Navigator initialRouteName="Home">
+    <BottomTab.Navigator
+      initialRouteName="Home"
+      tabBar={(props) => <TabBar {...props} />}
+      tabBarOptions={{
+        activeBackgroundColor: "#5797d4",
+        inactiveBackgroundColor: "#5797d4",
+        showLabel: false,
+      }}
+    >
       <BottomTab.Screen
         name="Home"
         component={ChallengeStack}
         options={{
-          header: {
-            left: true,
-          },
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-code-working" />
           ),
