@@ -12,7 +12,7 @@ import {
 } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default function ProfileScreen(props) {
+export default function ChallengeScreen(props) {
   return (
     <Container>
       <Header>

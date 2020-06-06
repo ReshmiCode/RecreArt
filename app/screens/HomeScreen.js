@@ -1,36 +1,37 @@
-import * as React from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import React from "react";
+import {
+  Container,
+  Header,
+  Content,
+  Body,
+  Title,
+  Text,
+  Left,
+  Right,
+  Icon,
+} from "native-base";
+import { LinearGradient } from "expo-linear-gradient";
 
-export default function HomeScreen() {
+export default function HomeScreen(props) {
   return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
+    <Container>
+      <Header>
+        <Left></Left>
+        <Body>
+          <Title>RecreArt</Title>
+        </Body>
+        <Right>
+          <Icon name="md-brush" />
+        </Right>
+      </Header>
+      <LinearGradient
+        colors={["#6A9ECF", "#9FC0DF", "#c4ddf5"]}
+        style={{ flex: 1 }}
       >
-        <Text style={styles.getStartedText}>hewwo</Text>
-      </ScrollView>
-    </View>
+        <Content padder>
+          <Text>hewwo</Text>
+        </Content>
+      </LinearGradient>
+    </Container>
   );
 }
-
-HomeScreen.navigationOptions = {
-  header: null,
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fafafa",
-  },
-  contentContainer: {
-    paddingTop: 15,
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    lineHeight: 24,
-    textAlign: "center",
-  },
-});
