@@ -11,6 +11,7 @@ connectDB();
 
 const users = require('./routes/users');
 const plants = require('./routes/plants');
+const challenges = require('./routes/challenges');
 
 const app = express();
 
@@ -31,6 +32,11 @@ app.use(
 app.use(
     '/api/v1/plants', 
     plants
+);
+
+app.use(
+    '/api/v1/challenges', 
+    challenges
 );
 
 const PORT = process.env.PORT || 8000;
