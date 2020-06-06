@@ -11,6 +11,7 @@ import {
   Icon,
 } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
+import ChallengeCard from "../components/ChallengeCard";
 
 export default function HomeScreen(props) {
   return (
@@ -29,7 +30,24 @@ export default function HomeScreen(props) {
         style={{ flex: 1 }}
       >
         <Content padder>
-          <Text>hewwo</Text>
+          <Body>
+            <Title>
+              <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+                Daily Challenge
+              </Text>
+            </Title>
+          </Body>
+          <ChallengeCard />
+          <Body>
+            <Title>
+              <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+                Weekly Challenges
+              </Text>
+            </Title>
+          </Body>
+          <ChallengeCard />
+          <ChallengeCard />
+          <ChallengeCard />
         </Content>
       </LinearGradient>
     </Container>
