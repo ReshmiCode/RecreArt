@@ -18,11 +18,6 @@ export default function BottomTabNavigator({ navigation }) {
     <BottomTab.Navigator
       initialRouteName="Home"
       tabBar={(props) => <TabBar {...props} />}
-      tabBarOptions={{
-        activeBackgroundColor: "#5797d4",
-        inactiveBackgroundColor: "#5797d4",
-        showLabel: false,
-      }}
     >
       <BottomTab.Screen
         name="Home"
