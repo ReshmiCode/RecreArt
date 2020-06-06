@@ -10,7 +10,7 @@ dotenv.config({ path: './config/config.env' });
 connectDB();
 
 const users = require('./routes/users');
-const plants = require('./routes/plants');
+const photos = require('./routes/photos');
 const challenges = require('./routes/challenges');
 
 const app = express();
@@ -30,8 +30,8 @@ app.use(
 );
 
 app.use(
-    '/api/v1/plants', 
-    plants
+    '/api/v1/photos', 
+    photos
 );
 
 app.use(
