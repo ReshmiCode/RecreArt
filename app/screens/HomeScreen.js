@@ -9,10 +9,9 @@ import {
   Left,
   Right,
   Icon,
-  Separator,
-  ListItem,
 } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
+import ChallengeCard from "../components/ChallengeCard";
 
 export default function HomeScreen(props) {
   return (
@@ -31,24 +30,24 @@ export default function HomeScreen(props) {
         style={{ flex: 1 }}
       >
         <Content padder>
-          <Separator bordered>
-            <Text>Daily Global Challenge</Text>
-          </Separator>
-          <ListItem>
-            <Text>Caroline Aaron</Text>
-          </ListItem>
-          <ListItem last>
-            <Text>Lee Allen</Text>
-          </ListItem>
-          <Separator bordered>
-            <Text>Other Challenges</Text>
-          </Separator>
-          <ListItem>
-            <Text>Caroline Aaron</Text>
-          </ListItem>
-          <ListItem last>
-            <Text>Lee Allen</Text>
-          </ListItem>
+          <Body>
+            <Title>
+              <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+                Daily Challenge
+              </Text>
+            </Title>
+          </Body>
+          <ChallengeCard />
+          <Body>
+            <Title>
+              <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+                Weekly Challenges
+              </Text>
+            </Title>
+          </Body>
+          <ChallengeCard />
+          <ChallengeCard />
+          <ChallengeCard />
         </Content>
       </LinearGradient>
     </Container>
