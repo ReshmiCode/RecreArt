@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getPhotos, addPhoto, deletePhoto, getPhoto, getUserPhoto} = require('../controllers/photo_controller');
+const { getPhotos, addPhoto, deletePhoto, getPhoto, getUserPhoto, updatePhoto} = require('../controllers/photo_controller');
 
 router
     .route('/')
@@ -10,7 +10,8 @@ router
 router
     .route('/:id')
     .get(getPhoto)
-    .delete(deletePhoto);
+    .delete(deletePhoto)
+    .patch(updatePhoto);
 
 router
     .route('/user/:id')

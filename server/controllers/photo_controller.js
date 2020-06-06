@@ -155,3 +155,68 @@ exports.getUserPhoto = async (req, res, next) => {
         });
     }
 }
+
+exports.updatePhoto = async (req, res, next) => {
+    try {
+
+        const photo = await Photo.findById(req.params.id);
+
+        if(!photo){
+            return res.status(404).json({
+                success: false,
+                error: 'No photo found'
+            });
+        }
+
+        if(req.body.userPhoto != null) {
+            await Photo.findById(req.params.id).replaceOne({}, { 
+                $set: { 
+                    userPhoto: req.body.userPhoto
+                } 
+            });
+        }
+
+        if(req.body.originalArt != null) {
+            await Photo.findById(req.params.id).replaceOne({}, { 
+                $set: { 
+                    originalArt: req.body.originalArt
+                } 
+            });
+        }
+
+        if(req.body.accuracy != null) {
+            await Photo.findById(req.params.id).replaceOne({}, { 
+                $set: { 
+                    accuracy: req.body.accuracy
+                } 
+            });
+        }
+
+        if(req.body.mode != null) {
+            await Photo.findById(req.params.id).replaceOne({}, { 
+                $set: { 
+                    mode: req.body.mode
+                } 
+            });
+        }
+
+        if(req.body.votes != null) {
+            await Photo.findById(req.params.id).replaceOne({}, { 
+                $set: { 
+                    votes: req.body.votes
+                } 
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            data: photo
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            error: 'Server Error'
+        });
+    }
+}
