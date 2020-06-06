@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -24,12 +24,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ReshmiCode/BackyardHacks20"
+    "url": "git+https://github.com/ReshmiCode/HackTheNE"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ReshmiCode/BackyardHacks20/issues"
+    "url": "https://github.com/ReshmiCode/HackTheNE/issues"
   },
-  "homepage": "https://github.com/ReshmiCode/BackyardHacks20#readme"
+  "homepage": "https://github.com/ReshmiCode/HackTheNE#readme"
 }
