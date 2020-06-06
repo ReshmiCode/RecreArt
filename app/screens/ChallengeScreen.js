@@ -1,8 +1,8 @@
 import * as React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-export default function HomeScreen(props) {
+export default function ChallengeScreen() {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -10,10 +10,6 @@ export default function HomeScreen(props) {
         contentContainerStyle={styles.contentContainer}
       >
         <Text style={styles.getStartedText}>hewwo</Text>
-        <Button
-          onPress={() => props.navigation.navigate("Challenge")}
-          title="go"
-        />
       </ScrollView>
     </View>
   );

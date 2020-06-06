@@ -1,23 +1,27 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
-import LinksScreen from "../screens/ProfileScreen";
+import ChallengeScreen from "../screens/ChallengeScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const BottomTab = createBottomTabNavigator();
-const INITIAL_ROUTE_NAME = "Home";
+const Stack = createStackNavigator();
 
 export default function BottomTabNavigator({ navigation }) {
-  navigation.setOptions({ headerTitle: "App Name" });
+  navigation.setOptions({ headerShown: false });
 
   return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+    <BottomTab.Navigator initialRouteName="Home">
       <BottomTab.Screen
         name="Home"
-        component={HomeScreen}
+        component={ChallengeStack}
         options={{
-          title: "Challenges",
+          header: {
+            left: true,
+          },
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-code-working" />
           ),
@@ -25,14 +29,22 @@ export default function BottomTabNavigator({ navigation }) {
       />
       <BottomTab.Screen
         name="Profile"
-        component={LinksScreen}
+        component={ProfileScreen}
         options={{
-          title: "Profile",
           tabBarIcon: ({ focused }) => (
             <TabBarIcon focused={focused} name="md-book" />
           ),
         }}
       />
     </BottomTab.Navigator>
+  );
+}
+
+function ChallengeStack() {
+  return (
+    <Stack.Navigator headerMode={false}>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Challenge" component={ChallengeScreen} />
+    </Stack.Navigator>
   );
 }
