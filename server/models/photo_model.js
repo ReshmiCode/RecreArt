@@ -19,6 +19,10 @@ const PhotoSchema = new mongoose.Schema({
 
     mode: {
         type: String
+    },
+
+    votes: {
+        type: Number
     }
 });
 
