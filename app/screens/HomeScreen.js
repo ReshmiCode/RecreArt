@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Header,
@@ -10,7 +10,7 @@ import {
   Right,
   Icon,
   Card,
-  CardItem
+  CardItem,
 } from "native-base";
 import { Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
@@ -25,12 +25,14 @@ export default function HomeScreen(props) {
 
   useEffect(() => {
     async function fetchData() {
-      const result = await axios("https://hack-the-ne.appspot.com/api/v1/challenges");
+      const result = await axios(
+        "https://hack-the-ne.appspot.com/api/v1/challenges"
+      );
       setChallenges(result.data.data);
       setGlobalChallenge(result.data.data[0]);
     }
     fetchData();
-    console.log(challenges)
+    console.log(challenges);
   }, []);
 
   return (
@@ -56,7 +58,10 @@ export default function HomeScreen(props) {
               </Text>
             </Title>
           </Body>
-          <ChallengeCard photo={globalChallenge}/>
+          <ChallengeCard
+            photo={globalChallenge}
+            navigation={props.navigation}
+          />
           <Body>
             <Title>
               <Text style={{ fontSize: 25, fontWeight: "bold" }}>
@@ -64,10 +69,8 @@ export default function HomeScreen(props) {
               </Text>
             </Title>
           </Body>
-          { challenges.reverse().map(function (photo, i) {
-              return (
-                  <ChallengeCard photo={ photo } key={ i }/>
-              );
+          {challenges.reverse().map(function (photo, i) {
+            return <ChallengeCard photo={photo} key={i} />;
           })}
         </Content>
       </LinearGradient>

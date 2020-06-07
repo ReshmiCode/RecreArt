@@ -6,7 +6,11 @@ export default function ChallengeCard(props) {
   console.log(props.photo);
   return (
     <Card>
-      <CardItem cardBody>
+      <CardItem
+        cardBody
+        button
+        onPress={() => props.navigation.navigate("Challenge")}
+      >
         <Image
           source={{
             uri: props.photo.originalArt,
