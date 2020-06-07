@@ -9,7 +9,7 @@ import {
   Left,
   Right,
   Icon,
-  Button
+  Button,
 } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Image } from "react-native";
@@ -35,26 +35,27 @@ export default function ChallengeScreen({ route, navigation }) {
         style={{ flex: 1 }}
       >
         <Content padder>
-        <Image
-          source={{
-            uri: photo.originalArt,
-          }}
-          style={{ height: 300, width: null, flex: 1 }}
-        />
-        <Button>
-          <Title> Upload Photo </Title>
-        </Button>
-        <Button>
-          <Title> Take a Picture </Title>
-        </Button>
-        <Button>
-          <Title> Submit </Title>
-        </Button>
-        { photo.photos.map(function (photo, i) {
-            return (
-              <PhotoCard photo={ photo } key={ i }/>
-            );
-        })}
+          <Image
+            source={{
+              uri: photo.originalArt,
+            }}
+            style={{ height: 300, width: null, flex: 1 }}
+          />
+          <Button onPress={() => navigation.navigate("AR")}>
+            <Title> AR Photobooth </Title>
+          </Button>
+          <Button>
+            <Title> Upload Photo </Title>
+          </Button>
+          <Button>
+            <Title> Take a Picture </Title>
+          </Button>
+          <Button>
+            <Title> Submit </Title>
+          </Button>
+          {photo.photos.map(function (photo, i) {
+            return <PhotoCard photo={photo} key={i} />;
+          })}
         </Content>
       </LinearGradient>
     </Container>

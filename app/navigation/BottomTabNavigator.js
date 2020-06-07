@@ -5,6 +5,7 @@ import * as React from "react";
 import HomeScreen from "../screens/HomeScreen";
 import ChallengeScreen from "../screens/ChallengeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import ARScreen from "../screens/ARScreen";
 import TabBar from "../navigation/TabBar";
 
 const BottomTab = createBottomTabNavigator();
@@ -29,6 +30,7 @@ function ChallengeStack() {
     <Stack.Navigator headerMode={false}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Challenge" component={ChallengeScreen} />
+      <Stack.Screen name="AR" component={ARScreen} />
     </Stack.Navigator>
   );
 }
