@@ -1,15 +1,9 @@
 import React from "react";
 import * as Google from "expo-google-app-auth";
 import { Thumbnail, Button, Text, View } from "native-base";
-import { Image } from "react-native";
 import Swiper from "react-native-swiper";
 
 import { ANDROID_CLIENT_ID, IOS_CLIENT_ID , ANDROID_APK_CLIENT_ID , IOS_APP_CLIENT_ID} from "../config";
-import naturedexTitle from "../assets/images/naturedexTitle.png";
-import tree from "../assets/images/tree.png";
-import camera from "../assets/images/camera.png";
-import ntbk from "../assets/images/ntbk.png";
-import mag from "../assets/images/magGlass.png";
 
 GLOBAL = require("../global");
 const axios = require("axios").default;
@@ -138,29 +132,21 @@ export default function SwiperComponent(props) {
     return (
         <Swiper showsButtons loop={false}>
         <View style={[styles.slides, { backgroundColor: "#CCD9CD" }]}>
-            <Image source={naturedexTitle} style={styles.natureDex}></Image>
-            <Image source={tree} style={styles.icon}></Image>
             <Text style={styles.desc}>
-            Identify plants when you're out and about!
+                Swipe 1
             </Text>
         </View>
         <View style={[styles.slides, { backgroundColor: "#A4C2AA" }]}>
-            <Image source={naturedexTitle} style={styles.natureDex}></Image>
-            <Image source={camera} style={styles.icon}></Image>
             <Text style={styles.desc}>
-            Learn more about any plant instantly by just snapping a photo!
+                Swipe 2
             </Text>
         </View>
         <View style={[styles.slides, { backgroundColor: "#A4C2BB" }]}>
-            <Image source={naturedexTitle} style={styles.natureDex}></Image>
-            <Image source={ntbk} style={styles.icon}></Image>
             <Text style={styles.desc}>
-            Keep track of all the plants you’ve seen before!
+                Swipe 3
             </Text>
         </View>
         <View style={[styles.slides, { backgroundColor: "#B4CDD0" }]}>
-            <Image source={naturedexTitle} style={styles.natureDex}></Image>
-            <Image source={mag} style={styles.icon}></Image>
             <Button style={styles.GoogleStyle} onPress={signInWithGoogle}>
             <Thumbnail
                 small
@@ -171,7 +157,6 @@ export default function SwiperComponent(props) {
             />
             <Text style={styles.TextStyle, { color: '#000' }}>Sign In With Google</Text>
             </Button>
-            <Text style={styles.loginDesc}>Go capture them all!</Text>
         </View>
         </Swiper>
     );
