@@ -43,7 +43,7 @@ def api_id():
     hist2 = cv2.calcHist([img2blk], [0], None, [256], [0, 256])
     colorDiff = cv2.compareHist(hist1, hist2, cv2.HISTCMP_BHATTACHARYYA) # 0-1 higher this is, less close it is
 
-    return str(colorDiff)
+    return str(1-colorDiff)
     
 
 
