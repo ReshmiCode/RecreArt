@@ -1,7 +1,7 @@
 module.exports = {
-    id: "",
+    googleID: "",
     username: "",
     profilePic: "",
-    userID: "",
+    databaseID: "",
     accessToken: "",
 };
