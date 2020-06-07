@@ -1,20 +1,9 @@
-# Copyright 2018 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 # [START gae_python37_app]
-from flask import Flask
-
+from flask import Flask, request
+import cv2
+import urllib
+import numpy as np
+import ssl
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
@@ -26,6 +15,37 @@ def hello():
     """Return a friendly HTTP greeting."""
     return 'Hello World!'
 
+@app.route('/score')
+def api_id():
+    # Check if an ID was provided as part of the URL.
+    # If ID is provided, assign it to a variable.
+    # If no ID is provided, display an error in the browser.
+    if 'p1' in request.args and 'p2' in request.args:# and 'cat' in request.args:
+        p1 = request.args.get('p1')
+        p2 = request.args.get('p2')
+        #cat = request.args.get('cat')
+    else:
+        return "Input error."
+
+    # get images from URL
+    ssl._create_default_https_context = ssl._create_unverified_context
+    req1 = urllib.request.urlopen(p1)
+    arr1 = np.asarray(bytearray(req1.read()), dtype=np.uint8)
+    img1 = cv2.imdecode(arr1, cv2.IMREAD_COLOR)
+    req2 = urllib.request.urlopen(p2)
+    arr2 = np.asarray(bytearray(req2.read()), dtype=np.uint8)
+    img2 = cv2.imdecode(arr2, cv2.IMREAD_COLOR)
+
+    # calc color correlation
+    img1blk = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY);
+    img2blk = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY);
+    hist1 = cv2.calcHist([img1blk], [0], None, [256], [0, 256])
+    hist2 = cv2.calcHist([img2blk], [0], None, [256], [0, 256])
+    colorDiff = cv2.compareHist(hist1, hist2, cv2.HISTCMP_BHATTACHARYYA) # 0-1 higher this is, less close it is
+
+    return str(colorDiff)
+    
+
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
@@ -33,3 +53,6 @@ if __name__ == '__main__':
     # can be configured by adding an `entrypoint` to app.yaml.
     app.run(host='127.0.0.1', port=8080, debug=True)
 # [END gae_python37_app]
+
+
+# python3 main.py to run
