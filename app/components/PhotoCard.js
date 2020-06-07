@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Card, CardItem ,Text , Body} from "native-base";
+import { Card, CardItem ,Text , Body, Button} from "native-base";
 import { Image } from "react-native";
 
 GLOBAL = require("../global");
@@ -15,6 +15,15 @@ export default function PhotoCard(props) {
     }
     fetchData();
   }, []);
+
+  async function vote() {
+    const currentVote = photoInfo.votes;
+    await axios.patch(`https://hack-the-ne.appspot.com/api/v1/photos/${props.photo}`,
+      {
+        votes: currentVote+1,
+      }
+    );
+  }
 
   return (
     <Card>
@@ -38,6 +47,9 @@ export default function PhotoCard(props) {
                 Votes: {photoInfo.votes}
               </Text>
             </Body>
+            <Button onPress={vote}>
+              <Text> Vote </Text>
+            </Button>
         </CardItem>
     </Card>
   );
