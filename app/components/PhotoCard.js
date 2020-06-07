@@ -20,7 +20,7 @@ export default function PhotoCard(props) {
 
   async function vote() {
     setPhotoVotes(photoVotes+1);
-    const currentVote = photoInfo.votes;
+    const currentVote = photoVotes;
     await axios.patch(`https://hack-the-ne.appspot.com/api/v1/photos/${props.photo}`,
       {
         votes: currentVote+1,
