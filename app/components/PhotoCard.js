@@ -53,7 +53,7 @@ export default function PhotoCard(props) {
       </CardItem>
       <CardItem>
         <Body>
-          <Text style={{ color: "#fff" }}>Accuracy: {photoInfo.accuracy}%</Text>
+          <Text style={{ color: "#fff" }}>Accuracy: {photoInfo.accuracy}</Text>
           {/* <Text style={{color: "#fff"}}>
                 Mode: {photoInfo.mode}
               </Text> */}

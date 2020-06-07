@@ -7,6 +7,7 @@ import {
   Title,
   Text,
   Left,
+  Spinner,
   Right,
   Icon,
   Button,
@@ -41,14 +42,17 @@ var styles = {
 export default function ProfileScreen(props) {
   let [userInfo, setUserInfo] = useState({});
   let [userPhotos, setUserPhotos] = useState([]);
+  let [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       const result = await axios(
         `https://hack-the-ne.appspot.com/api/v1/users/${GLOBAL.googleID}`
       );
       setUserInfo(result.data.data[0]);
       setUserPhotos(result.data.data[0].photos);
+      setLoading(false);
     }
     fetchData();
     //console.log(userInfo.photos.length);
@@ -146,7 +150,8 @@ export default function ProfileScreen(props) {
               </Text>
             </Title>
           </Body>
-          {userPhotos.length == 0 && (
+          {loading && <Spinner color="black" />}
+          {!loading && userPhotos.length == 0 && (
             <Body>
               <Text>No photos added yet.</Text>
             </Body>
