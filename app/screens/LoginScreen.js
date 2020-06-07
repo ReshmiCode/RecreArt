@@ -26,7 +26,7 @@ var styles = {
   logo: {
     height: 236,
     width: 420,
-    justifySelf: "center",
+    //justifySelf: "center",
   },
   textStyle: {
     color: "#fff",
@@ -52,43 +52,40 @@ export default function SwiperComponent(props) {
   GLOBAL.profilePic = "";
   GLOBAL.databaseID = "";
 
-    const newProfile = () => {
-        const newUser = {
-            googleID: GLOBAL.googleID,
-            userName: GLOBAL.username,
-            profilePic: GLOBAL.profilePic
-        };
-
-        axios
-        .get(`https://hack-the-ne.appspot.com/api/v1/users/${newUser.googleID}`)
-        .then(function (response) {
-            console.log(response.data);
-            if (response.data.data.length == 0) {
-                console.log("User does not exist");
-                axios
-                    .post("https://hack-the-ne.appspot.com/api/v1/users", {
-                        googleID: newUser.googleID,
-                        userName: newUser.userName,
-                        profilePic: newUser.profilePic,
-                    })
-                    .then(function (response) {
-                        //console.log(response);
-                        GLOBAL.databaseID = response.data.data._id;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                } else {
-                    console.log("User exists");
-                    GLOBAL.databaseID = response.data.data[0]._id;
-                }
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .then(function () {});
+  const newProfile = () => {
+    const newUser = {
+      googleID: GLOBAL.googleID,
+      userName: GLOBAL.username,
+      profilePic: GLOBAL.profilePic,
     };
-    
+
+    axios
+      .get(`https://hack-the-ne.appspot.com/api/v1/users/${newUser.googleID}`)
+      .then(function (response) {
+        if (response.data.data.length == 0) {
+          axios
+            .post("https://hack-the-ne.appspot.com/api/v1/users", {
+              googleID: newUser.googleID,
+              userName: newUser.userName,
+              profilePic: newUser.profilePic,
+            })
+            .then(function (response) {
+              //console.log(response);
+              GLOBAL.databaseID = response.data.data._id;
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        } else {
+          GLOBAL.databaseID = response.data.data[0]._id;
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {});
+  };
+
   const signInWithGoogle = async () => {
     try {
       const { type, accessToken, user } = await Google.logInAsync({

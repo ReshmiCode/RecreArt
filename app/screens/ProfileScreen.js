@@ -64,7 +64,7 @@ export default function ProfileScreen(props) {
         scopes: ["profile", "email"],
       });
 
-      console.log(type);
+      //console.log(type);
       if (type === "success" || type === "default") {
         GLOBAL.googleID = "";
         GLOBAL.username = "";
@@ -72,7 +72,7 @@ export default function ProfileScreen(props) {
         GLOBAL.accessToken = "";
         GLOBAL.databaseID = "";
 
-        console.log("Signed Out");
+        //console.log("Signed Out");
         props.navigation.navigate("LogIn");
         return accessToken;
       } else {
