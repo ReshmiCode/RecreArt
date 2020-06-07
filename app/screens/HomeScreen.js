@@ -70,7 +70,10 @@ export default function HomeScreen(props) {
             </Title>
           </Body>
           {challenges.reverse().map(function (photo, i) {
-            return <ChallengeCard photo={photo} key={i} />;
+            return <ChallengeCard
+            photo={globalChallenge}
+            navigation={props.navigation}
+          />;
           })}
         </Content>
       </LinearGradient>
