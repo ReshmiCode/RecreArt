@@ -116,8 +116,8 @@ export default function ChallengeScreen({ route, navigation }) {
 
   const addPhoto = async () => {
 
-    await cloudinaryUpload(image);
-    console.log(image);
+    //await cloudinaryUpload(image);
+    //console.log(image);
     //await getAccuracy();
 
     const photoInfo = {
