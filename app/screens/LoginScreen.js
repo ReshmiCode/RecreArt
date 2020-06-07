@@ -3,6 +3,7 @@ import * as Google from "expo-google-app-auth";
 import { Thumbnail, Button, Text, View } from "native-base";
 import Swiper from "react-native-swiper";
 import { Image } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 import logo from "../assets/images/logo.png";
 
@@ -39,7 +40,7 @@ var styles = {
     backgroundColor: "#4285F4",
     borderWidth: 1,
     borderColor: "#4285F4",
-    borderRadius: 1,
+    borderRadius: 6,
     margin: 5,
     padding: 10,
     elevation: 10,
@@ -52,43 +53,43 @@ export default function SwiperComponent(props) {
   GLOBAL.profilePic = "";
   GLOBAL.databaseID = "";
 
-    const newProfile = () => {
-        const newUser = {
-            googleID: GLOBAL.googleID,
-            userName: GLOBAL.username,
-            profilePic: GLOBAL.profilePic
-        };
-
-        axios
-        .get(`https://hack-the-ne.appspot.com/api/v1/users/${newUser.googleID}`)
-        .then(function (response) {
-            console.log(response.data);
-            if (response.data.data.length == 0) {
-                console.log("User does not exist");
-                axios
-                    .post("https://hack-the-ne.appspot.com/api/v1/users", {
-                        googleID: newUser.googleID,
-                        userName: newUser.userName,
-                        profilePic: newUser.profilePic,
-                    })
-                    .then(function (response) {
-                        //console.log(response);
-                        GLOBAL.databaseID = response.data.data._id;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                } else {
-                    console.log("User exists");
-                    GLOBAL.databaseID = response.data.data[0]._id;
-                }
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .then(function () {});
+  const newProfile = () => {
+    const newUser = {
+      googleID: GLOBAL.googleID,
+      userName: GLOBAL.username,
+      profilePic: GLOBAL.profilePic,
     };
-    
+
+    axios
+      .get(`https://hack-the-ne.appspot.com/api/v1/users/${newUser.googleID}`)
+      .then(function (response) {
+        console.log(response.data);
+        if (response.data.data.length == 0) {
+          console.log("User does not exist");
+          axios
+            .post("https://hack-the-ne.appspot.com/api/v1/users", {
+              googleID: newUser.googleID,
+              userName: newUser.userName,
+              profilePic: newUser.profilePic,
+            })
+            .then(function (response) {
+              //console.log(response);
+              GLOBAL.databaseID = response.data.data._id;
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        } else {
+          console.log("User exists");
+          GLOBAL.databaseID = response.data.data[0]._id;
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {});
+  };
+
   const signInWithGoogle = async () => {
     try {
       const { type, accessToken, user } = await Google.logInAsync({
@@ -118,20 +119,25 @@ export default function SwiperComponent(props) {
   };
 
   return (
-    <View style={[styles.slides, { backgroundColor: "#B4CDD0" }]}>
-      <Image source={logo} style={styles.logo}></Image>
-      <Button style={styles.GoogleStyle} onPress={signInWithGoogle}>
-        <Thumbnail
-          small
-          source={{
-            uri: "https://img.icons8.com/color/48/000000/google-logo.png",
-          }}
-          style={{ marginLeft: 9 }}
-        />
-        <Text style={(styles.TextStyle, { color: "#000" })}>
-          Sign In With Google
-        </Text>
-      </Button>
-    </View>
+    <LinearGradient
+      colors={["#517ca4", "#87afd5", "#9FC0DF"]}
+      style={{ flex: 1 }}
+    >
+      <View style={styles.slides}>
+        <Image source={logo} style={styles.logo}></Image>
+        <Button style={styles.GoogleStyle} onPress={signInWithGoogle}>
+          <Thumbnail
+            small
+            source={{
+              uri: "https://img.icons8.com/color/48/000000/google-logo.png",
+            }}
+            style={{ marginLeft: 9 }}
+          />
+          <Text style={(styles.TextStyle, { color: "#000" })}>
+            Sign In With Google
+          </Text>
+        </Button>
+      </View>
+    </LinearGradient>
   );
 }

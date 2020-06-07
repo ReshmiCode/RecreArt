@@ -28,7 +28,7 @@ export default function HomeScreen(props) {
       const result = await axios(
         "https://hack-the-ne.appspot.com/api/v1/challenges"
       );
-      
+
       setGlobalChallenge(result.data.data[0]);
       setChallenges(result.data.data);
     }
@@ -63,7 +63,7 @@ export default function HomeScreen(props) {
             photo={globalChallenge}
             navigation={props.navigation}
           />
-          <Body>
+          <Body style={{ paddingTop: 15 }}>
             <Title>
               <Text style={{ fontSize: 25, fontWeight: "bold" }}>
                 All Challenges
@@ -71,10 +71,9 @@ export default function HomeScreen(props) {
             </Title>
           </Body>
           {challenges.map(function (photo, i) {
-            return <ChallengeCard
-            photo={photo}
-            navigation={props.navigation}
-          />;
+            return (
+              <ChallengeCard photo={photo} navigation={props.navigation} />
+            );
           })}
         </Content>
       </LinearGradient>
