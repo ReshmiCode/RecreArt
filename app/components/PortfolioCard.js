@@ -44,7 +44,7 @@ export default function ChallengeCard(props) {
           {/* <Text style={{color: "#fff"}}>
                 Mode: {photoInfo.mode}
               </Text> */}
-          <Text style={{ color: "#fff" }}>Votes: {photoVotes}</Text>
+          <Text style={{ color: "#fff" }}>Likes: {photoVotes}</Text>
         </Body>
       </CardItem>
     </Card>

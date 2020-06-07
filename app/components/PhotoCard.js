@@ -57,15 +57,15 @@ export default function PhotoCard(props) {
           {/* <Text style={{color: "#fff"}}>
                 Mode: {photoInfo.mode}
               </Text> */}
-          <Text style={{ color: "#fff" }}>Votes: {photoVotes}</Text>
+          <Text style={{ color: "#fff" }}>Likes: {photoVotes}</Text>
         </Body>
         {voted ? (
           <Button onPress={unvote}>
-            <Text> Unvote </Text>
+            <Text> Unlike </Text>
           </Button>
         ) : (
           <Button onPress={vote}>
-            <Text> Vote </Text>
+            <Text> Like </Text>
           </Button>
         )}
       </CardItem>

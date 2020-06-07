@@ -55,7 +55,7 @@ export default function HomeScreen(props) {
           <Body>
             <Title>
               <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-                Global Challenge
+                Daily Challenge
               </Text>
             </Title>
           </Body>
