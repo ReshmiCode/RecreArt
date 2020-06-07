@@ -156,15 +156,24 @@ export default function ChallengeScreen({ route, navigation }) {
           />
           <Body style={{ flex: 1, flexDirection: "column" }}>
             <Body style={{ margin: 10 }}>
-              <Button onPress={() => navigation.navigate("AR")}>
+              <Button
+                onPress={() => navigation.navigate("AR")}
+                style={{ borderRadius: 6 }}
+              >
                 <Text> AR Photobooth </Text>
               </Button>
             </Body>
             <Body style={{ flex: 1, flexDirection: "row", marginTop: -5 }}>
-              <Button onPress={pickImage} style={{ margin: 10 }}>
+              <Button
+                onPress={pickImage}
+                style={{ margin: 10, borderRadius: 6 }}
+              >
                 <Text> Upload Photo </Text>
               </Button>
-              <Button onPress={takeImage} style={{ margin: 10 }}>
+              <Button
+                onPress={takeImage}
+                style={{ margin: 10, borderRadius: 6 }}
+              >
                 <Text> Take a Picture </Text>
               </Button>
             </Body>
