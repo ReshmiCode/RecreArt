@@ -130,22 +130,6 @@ export default function SwiperComponent(props) {
     };
 
     return (
-        <Swiper showsButtons loop={false}>
-        <View style={[styles.slides, { backgroundColor: "#CCD9CD" }]}>
-            <Text style={styles.desc}>
-                Swipe 1
-            </Text>
-        </View>
-        <View style={[styles.slides, { backgroundColor: "#A4C2AA" }]}>
-            <Text style={styles.desc}>
-                Swipe 2
-            </Text>
-        </View>
-        <View style={[styles.slides, { backgroundColor: "#A4C2BB" }]}>
-            <Text style={styles.desc}>
-                Swipe 3
-            </Text>
-        </View>
         <View style={[styles.slides, { backgroundColor: "#B4CDD0" }]}>
             <Button style={styles.GoogleStyle} onPress={signInWithGoogle}>
             <Thumbnail
@@ -158,6 +142,5 @@ export default function SwiperComponent(props) {
             <Text style={styles.TextStyle, { color: '#000' }}>Sign In With Google</Text>
             </Button>
         </View>
-        </Swiper>
     );
 }
