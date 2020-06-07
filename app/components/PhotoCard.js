@@ -7,16 +7,19 @@ const axios = require("axios").default;
 
 export default function PhotoCard(props) {
   let [photoInfo, setPhotoInfo] = useState({});
+  let [photoVotes, setPhotoVotes] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
       const result = await axios(`https://hack-the-ne.appspot.com/api/v1/photos/${props.photo}`);
       setPhotoInfo(result.data.data);
+      setPhotoVotes(result.data.data.votes);
     }
     fetchData();
   }, []);
 
   async function vote() {
+    setPhotoVotes(photoVotes+1);
     const currentVote = photoInfo.votes;
     await axios.patch(`https://hack-the-ne.appspot.com/api/v1/photos/${props.photo}`,
       {
@@ -44,7 +47,7 @@ export default function PhotoCard(props) {
                 Mode: {photoInfo.mode}
               </Text>
               <Text style={{color: "#fff"}}>
-                Votes: {photoInfo.votes}
+                Votes: {photoVotes}
               </Text>
             </Body>
             <Button onPress={vote}>
