@@ -4,6 +4,8 @@ import cv2
 import urllib
 import numpy as np
 import ssl
+from skimage.feature import local_binary_pattern
+from scipy.stats import itemfreq
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
@@ -42,8 +44,19 @@ def api_id():
     hist1 = cv2.calcHist([img1blk], [0], None, [256], [0, 256])
     hist2 = cv2.calcHist([img2blk], [0], None, [256], [0, 256])
     colorDiff = cv2.compareHist(hist1, hist2, cv2.HISTCMP_BHATTACHARYYA) # 0-1 higher this is, less close it is
+    colorDiff = 1-colorDiff
 
-    return str(1-colorDiff)
+    # texture comparison
+    lbp1 = local_binary_pattern(img1blk, 24, 3, method='uniform')
+    freq1 = itemfreq(lbp1.ravel())
+    text_hist1 = freq1[:, 1]/sum(freq1[:, 1]) # normalize
+    lbp2 = local_binary_pattern(img2blk, 24, 3, method='uniform')
+    freq2 = itemfreq(lbp2.ravel())
+    text_hist2 = freq2[:, 1]/sum(freq2[:, 1])
+    textDiff = cv2.compareHist(np.array(text_hist1, dtype=np.float32), np.array(text_hist2, dtype=np.float32), cv2.HISTCMP_BHATTACHARYYA)
+    textDiff = 1-textDiff
+
+    return str(textDiff)
     
 
 
