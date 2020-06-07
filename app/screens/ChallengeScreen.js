@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState } from "react";
 import {
   Container,
   Header,
@@ -9,7 +9,7 @@ import {
   Left,
   Right,
   Icon,
-  Button
+  Button,
 } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import { Image } from "react-native";
@@ -23,12 +23,9 @@ const axios = require("axios").default;
 
 export default function ChallengeScreen({ route, navigation }) {
   let [image, setImage] = useState(null);
-  let [imageBase, setImageBase] = useState(null);
-  let [loading, setLoading] = useState(false);
+  let [accuracy, setAccuracy] = useState(0);
 
   const { photo } = route.params;
-  console.log("photo");
-  console.log(photo);
 
   const removePic = () => {
     setImage(null);
@@ -63,7 +60,6 @@ export default function ChallengeScreen({ route, navigation }) {
       });
       if (!result.cancelled) {
         setImage(result.uri);
-        setImageBase(result.base64);
       }
     } catch (E) {
       console.log(E);
@@ -80,40 +76,78 @@ export default function ChallengeScreen({ route, navigation }) {
       });
       if (!result.cancelled) {
         setImage(result.uri);
-        setImageBase(result.base64);
       }
     } catch (E) {
       console.log(E);
     }
   };
 
-  const addPhoto = async () => {
-    const photoInfo = {
-      userID: GLOBAL.googleID,
-      challengeID: photo._id,
-      userPhoto: image,
-      originalArt: photo.originalArt,
-      accuracy: "0%",
-      mode: "default",
-      votes: 0
-    }
-
+  //TODO: Theoreotically this should work
+  const getAccuracy = async () => {
     try {
-      const response = await axios.post(
-        `https://hack-the-ne.appspot.com/api/v1/photos`,
-        photoInfo
-      );
-      setLoading(false);
-      //Navigate to Profile
+      const result = await axios(`https://hack-the-ne-ml.wl.r.appspot.com/score?p1=${image}&p2=${photo.originalArt}`);
+      console.log(result);
+      setAccuracy(result);
     } catch (err) {
       console.log(err);
     }
   }
 
+  //TODO: Not Uploading
+  const cloudinaryUpload = async (photo) => {
+    const data = new FormData()
+    data.append('file', photo)
+    data.append('upload_preset', 'hack-the-ne')
+    data.append("cloud_name", "hack-the-ne")
+    //console.log(data);
+    const result = await fetch("https://api.cloudinary.com/v1_1/hack-the-ne/image/upload", {
+      method: "post",
+      body: data
+    }).then(res => {
+      res.json()
+      console.log(res);
+    }).then(data => {
+        console.log(data.secure_url);
+        setImage(data.secure_url)
+    }).catch(err => {
+      console.log("An Error Occured While Uploading")
+    })
+  }
+
+  const addPhoto = async () => {
+
+    await cloudinaryUpload(image);
+    console.log(image);
+    //await getAccuracy();
+
+    const photoInfo = {
+      userID: GLOBAL.googleID,
+      challengeID: photo._id,
+      userPhoto: image,
+      originalArt: photo.originalArt,
+      accuracy: "58.9%",
+      mode: "default",
+      votes: 0,
+    };
+
+    try {
+      const response = await axios
+        .post(`https://hack-the-ne.appspot.com/api/v1/photos`, photoInfo)
+        .then(() => navigation.navigate("Home"));
+    } catch (err) {
+      console.log("Adding in databse")
+      console.log(err);
+    }
+  };
+
   return (
     <Container>
       <Header>
-        <Left></Left>
+        <Left>
+          <Button onPress={() => navigation.goBack()}>
+            <Icon name="md-arrow-back" />
+          </Button>
+        </Left>
         <Body>
           <Title>RecreArt</Title>
         </Body>
@@ -126,44 +160,41 @@ export default function ChallengeScreen({ route, navigation }) {
         style={{ flex: 1 }}
       >
         <Content padder>
-        <Image
-          source={{
-            uri: photo.originalArt,
-          }}
-          style={{ height: 300, width: null, flex: 1 }}
-        />
-        <Button onPress={pickImage}>
-          <Title> Upload Photo </Title>
-        </Button>
-        <Button onPress={takeImage}>
-          <Title> Take a Picture </Title>
-        </Button>
-        {image ? (
-            <Image
-              source={{ uri: image }}
-              style={{ width: 300, height: 300, marginVertical: 10 }}
-            />
-          ) : (
-            <Image
-              source={{ uri: photo.originalArt }}
-              style={{ height: 250, width: 250, flex: 1 }}
-            />
-          )
-        }
-        {image &&
-          (loading ? (
-            <Spinner color="green" />
-          ) : (
-            <Button onPress={addPhoto}>
-              <Title> Submit </Title>
-            </Button>
-          ))
-        }
-        { photo.photos.map(function (photo, i) {
-            return (
-              <PhotoCard photo={ photo } key={ i }/>
-            );
-        })}
+          <Image
+            source={{
+              uri: photo.originalArt,
+            }}
+            style={{ height: 300, width: null, flex: 1 }}
+          />
+          <Body style={{ flex: 1, flexDirection: "column" }}>
+            <Body style={{ margin: 10 }}>
+              <Button onPress={() => navigation.navigate("AR")}>
+                <Text> AR Photobooth </Text>
+              </Button>
+            </Body>
+            <Body style={{ flex: 1, flexDirection: "row", marginTop: -5 }}>
+              <Button onPress={pickImage} style={{ margin: 10 }}>
+                <Text> Upload Photo </Text>
+              </Button>
+              <Button onPress={takeImage} style={{ margin: 10 }}>
+                <Text> Take a Picture </Text>
+              </Button>
+            </Body>
+          </Body>
+          {image && (
+            <Body style={{ flex: 1, flexDirection: "row" }}>
+              <Image
+                source={{ uri: image }}
+                style={{ width: 300, height: 300, margin: 10 }}
+              />
+              <Button onPress={addPhoto} transparent>
+                <Icon name="ios-arrow-dropright-circle" />
+              </Button>
+            </Body>
+          )}
+          {photo.photos.map(function (photo, i) {
+            return <PhotoCard photo={photo} key={i} />;
+          })}
         </Content>
       </LinearGradient>
     </Container>

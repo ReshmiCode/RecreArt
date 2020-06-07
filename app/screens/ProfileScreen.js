@@ -6,6 +6,7 @@ import {
   Body,
   Title,
   Text,
+  Thumbnail,
   Left,
   Right,
   Icon,
@@ -150,6 +151,11 @@ export default function ProfileScreen(props) {
               </Text>
             </Title>
           </Body>
+          {userPhotos.length == 0 && (
+            <Body>
+              <Text>No photos added yet.</Text>
+            </Body>
+          )}
           {userPhotos.map(function (photo, i) {
             return <PortfolioCard photo={photo} key={i} />;
           })}

@@ -130,7 +130,7 @@ export default {
   checkboxTickColor: "#0e1043",
 
   // Color
-  brandPrimary: platform === PLATFORM.IOS ? "#007aff" : "#2c6ca8",
+  brandPrimary: "#2c6ca8",
   brandInfo: "#62B1F6",
   brandSuccess: "#5cb85c",
   brandDanger: "#d9534f",
@@ -164,7 +164,7 @@ export default {
 
   // Footer
   footerHeight: 55,
-  footerDefaultBg: platform === PLATFORM.IOS ? "#F8F8F8" : "#2c6ca8",
+  footerDefaultBg: "#2c6ca8",
   footerPaddingBottom: 0,
 
   // FooterTab
@@ -176,16 +176,16 @@ export default {
   tabActiveBgColor: "#2c6ca8",
 
   // Header
-  toolbarBtnColor: platform === PLATFORM.IOS ? "#007aff" : "#0e1043",
-  toolbarDefaultBg: platform === PLATFORM.IOS ? "#F8F8F8" : "#2c6ca8",
-  toolbarHeight: platform === PLATFORM.IOS ? 64 : 56,
+  toolbarBtnColor: "#0e1043",
+  toolbarDefaultBg: "#2c6ca8",
+  toolbarHeight: 56,
   toolbarSearchIconSize: platform === PLATFORM.IOS ? 20 : 23,
   toolbarInputColor: platform === PLATFORM.IOS ? "#CECDD2" : "#0e1043",
   searchBarHeight: platform === PLATFORM.IOS ? 30 : 40,
   searchBarInputHeight: platform === PLATFORM.IOS ? 30 : 50,
   toolbarBtnTextColor: platform === PLATFORM.IOS ? "#007aff" : "#0e1043",
   iosStatusbar: "dark-content",
-  toolbarDefaultBorder: platform === PLATFORM.IOS ? "#a7a6ab" : "#2c6ca8",
+  toolbarDefaultBorder: "#2c6ca8",
   get statusBarColor() {
     return color(this.toolbarDefaultBg).darken(0.2).hex();
   },
@@ -226,7 +226,7 @@ export default {
   listItemPadding: platform === PLATFORM.IOS ? 10 : 12,
   listNoteColor: "#808080",
   listNoteSize: 13,
-  listItemSelected: platform === PLATFORM.IOS ? "#007aff" : "#2c6ca8",
+  listItemSelected: "#2c6ca8",
 
   // Progress Bar
   defaultProgressColor: "#E4202D",
@@ -254,7 +254,7 @@ export default {
   inverseSpinnerColor: "#1A191B",
 
   // Tab
-  tabDefaultBg: platform === PLATFORM.IOS ? "#F8F8F8" : "#2c6ca8",
+  tabDefaultBg: "#2c6ca8",
   topTabBarTextColor: platform === PLATFORM.IOS ? "#6b6b6b" : "#000",
   topTabBarActiveTextColor: platform === PLATFORM.IOS ? "#007aff" : "#0e1043",
   topTabBarBorderColor: platform === PLATFORM.IOS ? "#a7a6ab" : "#0e1043",

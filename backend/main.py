@@ -62,7 +62,7 @@ def api_id():
     #kp_1, desc_1 = sift.detectAndCompute(img1, None)
     #kp_2, desc_2 = sift.detectAndCompute(img2, None)
 
-    return str(colorDiff*0.5+textDiff*0.5)
+    return str(round(colorDiff*0.5+textDiff*0.5, 2) * 100)
     
 
 

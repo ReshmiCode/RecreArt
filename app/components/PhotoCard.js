@@ -43,9 +43,9 @@ export default function PhotoCard(props) {
               <Text style={{color: "#fff"}}>
                 Accuracy: {photoInfo.accuracy}
               </Text>
-              <Text style={{color: "#fff"}}>
+              {/* <Text style={{color: "#fff"}}>
                 Mode: {photoInfo.mode}
-              </Text>
+              </Text> */}
               <Text style={{color: "#fff"}}>
                 Votes: {photoVotes}
               </Text>
