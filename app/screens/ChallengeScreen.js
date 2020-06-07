@@ -23,10 +23,9 @@ const axios = require("axios").default;
 
 export default function ChallengeScreen({ route, navigation }) {
   let [image, setImage] = useState(null);
+  let [accuracy, setAccuracy] = useState(0);
 
   const { photo } = route.params;
-  console.log("photo");
-  console.log(photo);
 
   const removePic = () => {
     setImage(null);
@@ -83,13 +82,50 @@ export default function ChallengeScreen({ route, navigation }) {
     }
   };
 
+  //TODO: Theoreotically this should work
+  const getAccuracy = async () => {
+    try {
+      const result = await axios(`https://hack-the-ne-ml.wl.r.appspot.com/score?p1=${image}&p2=${photo.originalArt}`);
+      console.log(result);
+      setAccuracy(result);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  //TODO: Not Uploading
+  const cloudinaryUpload = async (photo) => {
+    const data = new FormData()
+    data.append('file', photo)
+    data.append('upload_preset', 'hack-the-ne')
+    data.append("cloud_name", "hack-the-ne")
+    //console.log(data);
+    const result = await fetch("https://api.cloudinary.com/v1_1/hack-the-ne/image/upload", {
+      method: "post",
+      body: data
+    }).then(res => {
+      res.json()
+      console.log(res);
+    }).then(data => {
+        console.log(data.secure_url);
+        setImage(data.secure_url)
+    }).catch(err => {
+      console.log("An Error Occured While Uploading")
+    })
+  }
+
   const addPhoto = async () => {
+
+    await cloudinaryUpload(image);
+    console.log(image);
+    //await getAccuracy();
+
     const photoInfo = {
       userID: GLOBAL.googleID,
       challengeID: photo._id,
       userPhoto: image,
       originalArt: photo.originalArt,
-      accuracy: "0%",
+      accuracy: "58.9%",
       mode: "default",
       votes: 0,
     };
@@ -99,6 +135,7 @@ export default function ChallengeScreen({ route, navigation }) {
         .post(`https://hack-the-ne.appspot.com/api/v1/photos`, photoInfo)
         .then(() => navigation.navigate("Home"));
     } catch (err) {
+      console.log("Adding in databse")
       console.log(err);
     }
   };
