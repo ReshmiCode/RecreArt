@@ -98,8 +98,11 @@ export default function ChallengeScreen({ route, navigation }) {
       .then((data) => {
         setImageURL(data.secure_url);
         url = data.secure_url;
+        console.log(
+          `https://hack-the-ne-ml.wl.r.appspot.com/score?p1=${url}&p2=${photo.originalArt}`
+        );
         return axios(
-          `https://hack-the-ne-ml.wl.r.appspot.com/score?p1=${data.secure_url}&p2=${photo.originalArt}`
+          `https://hack-the-ne-ml.wl.r.appspot.com/score?p1=${url}&p2=${photo.originalArt}`
         );
       })
       .then((res) => {
@@ -117,7 +120,9 @@ export default function ChallengeScreen({ route, navigation }) {
           photoInfo
         );
       })
+      .catch((err) => console.log(err))
       .then(() => {
+        console.log("um");
         setLoading(false);
         navigation.navigate("Home");
       });
