@@ -25,7 +25,7 @@ const axios = require("axios").default;
 export default function ChallengeScreen({ route, navigation }) {
   let [image, setImage] = useState(null);
   let [img64, setImg64] = useState(null);
-  let [accuracy, setAccuracy] = useState(0);
+  let [imageURL, setImageURL] = useState(null);
   let [loading, setLoading] = useState(false);
 
   const { photo } = route.params;
@@ -82,65 +82,45 @@ export default function ChallengeScreen({ route, navigation }) {
     }
   };
 
-  const getAccuracy = async () => {
-    try {
-      const result = await axios(
-        `https://hack-the-ne-ml.wl.r.appspot.com/score?p1=${image}&p2=${photo.originalArt}`
-      );
-      setAccuracy(result.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const cloudinaryUpload = async () => {
+  const uploadPhoto = () => {
+    let url;
+    setLoading(true);
     const data = new FormData();
     data.append("file", "data:image/jpeg;base64," + img64);
     data.append("upload_preset", "hack-the-ne");
     data.append("cloud_name", "hack-the-ne");
     //console.log(data);
-    const result = await fetch(
-      "https://api.cloudinary.com/v1_1/hack-the-ne/image/upload",
-      {
-        method: "post",
-        body: data,
-      }
-    )
+    fetch("https://api.cloudinary.com/v1_1/hack-the-ne/image/upload", {
+      method: "post",
+      body: data,
+    })
       .then((res) => res.json())
       .then((data) => {
-        setImage(data.secure_url);
+        setImageURL(data.secure_url);
+        url = data.secure_url;
+        return axios(
+          `https://hack-the-ne-ml.wl.r.appspot.com/score?p1=${data.secure_url}&p2=${photo.originalArt}`
+        );
       })
-      .catch((err) => {
-        console.log("An Error Occured While Uploading");
-        console.log(err);
+      .then((res) => {
+        const photoInfo = {
+          userID: GLOBAL.googleID,
+          challengeID: photo._id,
+          userPhoto: url,
+          originalArt: photo.originalArt,
+          accuracy: res.data,
+          mode: "default",
+          votes: 0,
+        };
+        return axios.post(
+          `https://hack-the-ne.appspot.com/api/v1/photos`,
+          photoInfo
+        );
+      })
+      .then(() => {
+        setLoading(false);
+        navigation.navigate("Home");
       });
-  };
-
-  const addPhoto = async () => {
-    setLoading(true);
-    await cloudinaryUpload();
-    await getAccuracy();
-
-    const photoInfo = {
-      userID: GLOBAL.googleID,
-      challengeID: photo._id,
-      userPhoto: image,
-      originalArt: photo.originalArt,
-      accuracy: accuracy,
-      mode: "default",
-      votes: 0,
-    };
-
-    try {
-      axios
-        .post(`https://hack-the-ne.appspot.com/api/v1/photos`, photoInfo)
-        .then(() => {
-          setLoading(false);
-          navigation.navigate("Home");
-        });
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   return (
@@ -190,7 +170,7 @@ export default function ChallengeScreen({ route, navigation }) {
                 source={{ uri: image }}
                 style={{ width: 300, height: 300, margin: 10 }}
               />
-              <Button onPress={addPhoto} transparent>
+              <Button onPress={uploadPhoto} transparent>
                 <Icon name="ios-arrow-dropright-circle" />
               </Button>
             </Body>
