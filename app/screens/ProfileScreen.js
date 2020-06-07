@@ -47,7 +47,6 @@ export default function ProfileScreen(props) {
       );
       setUserInfo(result.data.data[0]);
       setUserPhotos(result.data.data[0].photos);
-      //console.log("UserInfo");
     }
     fetchData();
     //console.log(userInfo.photos.length);

@@ -80,7 +80,6 @@ export default function ChallengeScreen({ route, navigation }) {
     }
   };
 
-  //TODO: Theoreotically this should work
   const getAccuracy = async () => {
     try {
       const result = await axios(
@@ -92,7 +91,6 @@ export default function ChallengeScreen({ route, navigation }) {
     }
   };
 
-  //TODO: Not Uploading
   const cloudinaryUpload = async () => {
     const data = new FormData();
     data.append("file", "data:image/jpeg;base64," + img64);
@@ -131,14 +129,13 @@ export default function ChallengeScreen({ route, navigation }) {
       votes: 0,
     };
 
-    /* try {
-      const response = await axios
+    try {
+      axios
         .post(`https://hack-the-ne.appspot.com/api/v1/photos`, photoInfo)
         .then(() => navigation.navigate("Home"));
     } catch (err) {
-      console.log("Adding in databse");
       console.log(err);
-    } */
+    }
   };
 
   return (

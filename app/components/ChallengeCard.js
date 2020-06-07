@@ -3,7 +3,6 @@ import { Card, CardItem } from "native-base";
 import { Image } from "react-native";
 
 export default function ChallengeCard(props) {
-  //console.log(props.photo);
   return (
     <Card>
       <CardItem
