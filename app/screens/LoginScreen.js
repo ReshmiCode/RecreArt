@@ -77,7 +77,6 @@ export default function SwiperComponent(props) {
         .get("https://hack-the-ne.appspot.com/api/v1/users/${newUser.googleID}")
         .then(function (response) {
             if (response.data.data.length == 0) {
-                console.log("User does not exist");
                 axios
                     .post("https://hack-the-ne.appspot.com/api/v1/users", {
                         googleID: newUser.googleID,
@@ -92,7 +91,6 @@ export default function SwiperComponent(props) {
                         console.log(error);
                     });
                 } else {
-                    console.log("User exists");
                     GLOBAL.databaseID = response.data.data[0]._id;
                 }
         })
