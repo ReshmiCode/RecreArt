@@ -9,7 +9,6 @@ export default function ChallengeCard(props) {
   let [photoInfo, setPhotoInfo] = useState({});
 
   useEffect(() => {
-    console.log("Photo:" + props.photo);
     async function fetchData() {
       const result = await axios(`https://hack-the-ne.appspot.com/api/v1/photos/${props.photo}`);
       setPhotoInfo(result.data.data);
