@@ -2,11 +2,7 @@
   "expo": {
     "name": "RecreArt",
     "slug": "RecreArt",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/paintbrush icon.png",
@@ -19,9 +15,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.recreart.app",
       "buildNumber": "1.0.0",
@@ -36,7 +30,7 @@
       },
       "config": {
         "googleSignIn": {
-          "reservedClientId": "com.googleusercontent.apps.509348673084-kkotkhn3hfoua9rmtshvoear184297oj"
+          "reservedClientId": "com.googleusercontent.apps.509348673084-s4i8kuaj3e9jh3pblv6g3t8v6vn37k04j"
         }
       }
     },
@@ -48,7 +42,7 @@
       "versionCode": 1,
       "backgroundColor": "#abc2a5",
       "icon": "./assets/images/favicon.png",
-  
+
       "permissions": [
         "CAMERA",
         "MANAGE_DOCUMENTS",
@@ -62,8 +56,8 @@
       },
       "config": {
         "googleSignIn": {
-          "apiKey": "294101273347-0pi8va3dof36cuv6mlurf7kqkelv9r3n.apps.googleusercontent.com",
-          "certificateHash": "64:57:0E:63:F7:61:27:EF:F0:A1:6B:29:2A:37:11:F6:FE:BC:D3:A2"
+          "apiKey": "509348673084-72ltnb5fq3osruqd79cld7scqhu0379t.apps.googleusercontent.com",
+          "certificateHash": "2E9A96D2DBCE99306DB21908602BAAE7E33C30FA"
         }
       }
     }
