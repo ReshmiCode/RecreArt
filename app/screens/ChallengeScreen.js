@@ -132,25 +132,28 @@ export default function ChallengeScreen({ route, navigation }) {
             }}
             style={{ height: 300, width: null, flex: 1 }}
           />
-          <Button onPress={() => navigation.navigate("AR")}>
-            <Title> AR Photobooth </Title>
-          </Button>
-          <Button onPress={pickImage}>
-            <Title> Upload Photo </Title>
-          </Button>
-          <Button onPress={takeImage}>
-            <Title> Take a Picture </Title>
-          </Button>
-          {image ? (
-            <Image
-              source={{ uri: image }}
-              style={{ width: 300, height: 300, marginVertical: 10 }}
-            />
-          ) : (
-            <Image
-              source={{ uri: photo.originalArt }}
-              style={{ height: 250, width: 250, flex: 1 }}
-            />
+          <Body style={{ flex: 1, flexDirection: "column" }}>
+            <Body style={{ margin: 10 }}>
+              <Button onPress={() => navigation.navigate("AR")}>
+                <Text> AR Photobooth </Text>
+              </Button>
+            </Body>
+            <Body style={{ flex: 1, flexDirection: "row", marginTop: -5 }}>
+              <Button onPress={pickImage} style={{ margin: 10 }}>
+                <Text> Upload Photo </Text>
+              </Button>
+              <Button onPress={takeImage} style={{ margin: 10 }}>
+                <Text> Take a Picture </Text>
+              </Button>
+            </Body>
+          </Body>
+          {image && (
+            <Body>
+              <Image
+                source={{ uri: image }}
+                style={{ width: 300, height: 300 }}
+              />
+            </Body>
           )}
           {image &&
             (loading ? (
