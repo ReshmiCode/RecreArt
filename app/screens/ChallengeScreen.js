@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Container,
   Header,
@@ -23,8 +23,6 @@ const axios = require("axios").default;
 
 export default function ChallengeScreen({ route, navigation }) {
   let [image, setImage] = useState(null);
-  let [imageBase, setImageBase] = useState(null);
-  let [loading, setLoading] = useState(false);
 
   const { photo } = route.params;
   console.log("photo");
@@ -63,7 +61,6 @@ export default function ChallengeScreen({ route, navigation }) {
       });
       if (!result.cancelled) {
         setImage(result.uri);
-        setImageBase(result.base64);
       }
     } catch (E) {
       console.log(E);
@@ -80,7 +77,6 @@ export default function ChallengeScreen({ route, navigation }) {
       });
       if (!result.cancelled) {
         setImage(result.uri);
-        setImageBase(result.base64);
       }
     } catch (E) {
       console.log(E);
@@ -99,12 +95,9 @@ export default function ChallengeScreen({ route, navigation }) {
     };
 
     try {
-      const response = await axios.post(
-        `https://hack-the-ne.appspot.com/api/v1/photos`,
-        photoInfo
-      );
-      setLoading(false);
-      //Navigate to Profile
+      const response = await axios
+        .post(`https://hack-the-ne.appspot.com/api/v1/photos`, photoInfo)
+        .then(() => navigation.navigate("Home"));
     } catch (err) {
       console.log(err);
     }
@@ -152,21 +145,16 @@ export default function ChallengeScreen({ route, navigation }) {
             </Body>
           </Body>
           {image && (
-            <Body>
+            <Body style={{ flex: 1, flexDirection: "row" }}>
               <Image
                 source={{ uri: image }}
-                style={{ width: 300, height: 300 }}
+                style={{ width: 300, height: 300, margin: 10 }}
               />
+              <Button onPress={addPhoto} transparent>
+                <Icon name="ios-arrow-dropright-circle" />
+              </Button>
             </Body>
           )}
-          {image &&
-            (loading ? (
-              <Spinner color="green" />
-            ) : (
-              <Button onPress={addPhoto}>
-                <Title> Submit </Title>
-              </Button>
-            ))}
           {photo.photos.map(function (photo, i) {
             return <PhotoCard photo={photo} key={i} />;
           })}
