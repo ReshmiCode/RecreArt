@@ -6,6 +6,7 @@ import numpy as np
 import ssl
 from skimage.feature import local_binary_pattern
 from scipy.stats import itemfreq
+from skimage import measure
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
@@ -56,7 +57,12 @@ def api_id():
     textDiff = cv2.compareHist(np.array(text_hist1, dtype=np.float32), np.array(text_hist2, dtype=np.float32), cv2.HISTCMP_BHATTACHARYYA)
     textDiff = 1-textDiff
 
-    return str(textDiff)
+    # feature matching
+    #sift = cv2.xfeatures2d.SIFT_create()
+    #kp_1, desc_1 = sift.detectAndCompute(img1, None)
+    #kp_2, desc_2 = sift.detectAndCompute(img2, None)
+
+    return str(colorDiff*0.5+textDiff*0.5)
     
 
 
