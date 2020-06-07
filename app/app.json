@@ -26,7 +26,7 @@
       "bundleIdentifier": "com.recreart.app",
       "buildNumber": "1.0.0",
       "backgroundColor": "#abc2a5",
-      "icon": "./assets/images/favicon.png",
+      "icon": "./assets/images/robot-dev.png",
       "supportsTablet": true,
       "usesIcloudStorage": true,
       "splash": {
