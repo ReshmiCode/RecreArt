@@ -23,6 +23,7 @@ const axios = require("axios").default;
 
 export default function ChallengeScreen({ route, navigation }) {
   let [image, setImage] = useState(null);
+  let [accuracy, setAccuracy] = useState(0);
 
   const { photo } = route.params;
   console.log("photo");
@@ -83,13 +84,27 @@ export default function ChallengeScreen({ route, navigation }) {
     }
   };
 
+  //TODO: Theoreotically this should work
+  const getAccuracy = async () => {
+    try {
+      const result = await axios(`https://hack-the-ne-ml.wl.r.appspot.com/score?p1=${image}&p2=${photo.originalArt}`);
+      console.log(result);
+      setAccuracy(result);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   const addPhoto = async () => {
+
+    await getAccuracy();
+
     const photoInfo = {
       userID: GLOBAL.googleID,
       challengeID: photo._id,
       userPhoto: image,
       originalArt: photo.originalArt,
-      accuracy: "0%",
+      accuracy: accuracy+"%",
       mode: "default",
       votes: 0,
     };
