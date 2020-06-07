@@ -73,27 +73,28 @@ export default function SwiperComponent(props) {
             profilePic: GLOBAL.profilePic
         };
 
-
         axios
-        .get("https://hack-the-ne.appspot.com/api/v1/users/api/v1/users/${newUser.googleID}")
+        .get("https://hack-the-ne.appspot.com/api/v1/users/${newUser.googleID}")
         .then(function (response) {
             if (response.data.data.length == 0) {
-            axios
-                .post("https://hack-the-ne.appspot.com/api/v1/users", {
-                    googleID: newUser.googleID,
-                    userName: newUser.userName,
-                    profilePic: newUser.profilePic,
-                })
-                .then(function (response) {
-                    console.log(response);
-                    GLOBAL.databaseID = response.data.data._id;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            } else {
-                GLOBAL.databaseID = response.data.data[0]._id;
-            }
+                console.log("User does not exist");
+                axios
+                    .post("https://hack-the-ne.appspot.com/api/v1/users", {
+                        googleID: newUser.googleID,
+                        userName: newUser.userName,
+                        profilePic: newUser.profilePic,
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                        GLOBAL.databaseID = response.data.data._id;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                } else {
+                    console.log("User exists");
+                    GLOBAL.databaseID = response.data.data[0]._id;
+                }
         })
         .catch(function (error) {
             console.log(error);
