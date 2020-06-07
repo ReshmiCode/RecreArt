@@ -72,7 +72,11 @@ export default function HomeScreen(props) {
           </Body>
           {challenges.map(function (photo, i) {
             return (
-              <ChallengeCard photo={photo} navigation={props.navigation} />
+              <ChallengeCard
+                key={photo._id}
+                photo={photo}
+                navigation={props.navigation}
+              />
             );
           })}
         </Content>

@@ -26,7 +26,6 @@ export default function ChallengeScreen({ route, navigation }) {
   let [image, setImage] = useState(null);
   let [img64, setImg64] = useState(null);
   let [imageURL, setImageURL] = useState(null);
-  let [accuracy, setAccuracy] = useState(0);
   let [loading, setLoading] = useState(false);
 
   const { photo } = route.params;
@@ -83,67 +82,8 @@ export default function ChallengeScreen({ route, navigation }) {
     }
   };
 
-  const getAccuracy = async () => {
-    try {
-      const result = await axios(
-        `https://hack-the-ne-ml.wl.r.appspot.com/score?p1=${imageURL}&p2=${photo.originalArt}`
-      );
-      setAccuracy(result.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const cloudinaryUpload = async () => {
-    const data = new FormData();
-    data.append("file", "data:image/jpeg;base64," + img64);
-    data.append("upload_preset", "hack-the-ne");
-    data.append("cloud_name", "hack-the-ne");
-    //console.log(data);
-    await fetch("https://api.cloudinary.com/v1_1/hack-the-ne/image/upload", {
-      method: "post",
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setImageURL(data.secure_url);
-        console.log("done");
-      })
-      .catch((err) => {
-        console.log("An Error Occured While Uploading");
-        console.log(err);
-      });
-  };
-
-  const addPhoto = async () => {
-    setLoading(true);
-    await cloudinaryUpload();
-    await getAccuracy();
-    console.log(imageURL);
-
-    const photoInfo = {
-      userID: GLOBAL.googleID,
-      challengeID: photo._id,
-      userPhoto: imageURL,
-      originalArt: photo.originalArt,
-      accuracy: accuracy,
-      mode: "default",
-      votes: 0,
-    };
-
-    try {
-      axios
-        .post(`https://hack-the-ne.appspot.com/api/v1/photos`, photoInfo)
-        .then(() => {
-          setLoading(false);
-          navigation.navigate("Home");
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const uploadPhoto = () => {
+    let url;
     setLoading(true);
     const data = new FormData();
     data.append("file", "data:image/jpeg;base64," + img64);
@@ -157,16 +97,16 @@ export default function ChallengeScreen({ route, navigation }) {
       .then((res) => res.json())
       .then((data) => {
         setImageURL(data.secure_url);
-        axios(
+        url = data.secure_url;
+        return axios(
           `https://hack-the-ne-ml.wl.r.appspot.com/score?p1=${data.secure_url}&p2=${photo.originalArt}`
         );
       })
       .then((res) => {
-        //setAccuracy(res.data);
         const photoInfo = {
           userID: GLOBAL.googleID,
           challengeID: photo._id,
-          userPhoto: imageURL,
+          userPhoto: url,
           originalArt: photo.originalArt,
           accuracy: res.data,
           mode: "default",
