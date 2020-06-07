@@ -3,15 +3,17 @@ import { Card, CardItem } from "native-base";
 import { Image } from "react-native";
 
 export default function ChallengeCard(props) {
-  console.log(props.photo);
+  //console.log(props.photo);
   return (
     <Card>
       <CardItem
         cardBody
         button
-        onPress={() => props.navigation.navigate("Challenge", {
-          photo: props.photo
-        })}
+        onPress={() =>
+          props.navigation.navigate("Challenge", {
+            photo: props.photo,
+          })
+        }
       >
         <Image
           source={{
