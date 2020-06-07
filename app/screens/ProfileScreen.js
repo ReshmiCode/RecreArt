@@ -6,11 +6,11 @@ import {
   Body,
   Title,
   Text,
-  Thumbnail,
   Left,
   Right,
   Icon,
   Button,
+  View,
 } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import PortfolioCard from "../components/PortfolioCard";
@@ -26,6 +26,15 @@ import {
 
 GLOBAL = require("../global");
 const axios = require("axios").default;
+
+var styles = {
+  button: {
+    width: 370,
+    margin: 10,
+    justifyContent: "center",
+    elevation: 10,
+  },
+};
 
 export default function ProfileScreen(props) {
   let [userInfo, setUserInfo] = useState({});
@@ -93,30 +102,44 @@ export default function ProfileScreen(props) {
         <Content padder>
           <Body>
             <Title>
-              <Text style={{ fontSize: 25, fontWeight: "bold" }}>Profile</Text>
+              <Text style={{ fontSize: 30, fontWeight: "bold" }}>Profile</Text>
             </Title>
           </Body>
-          <Body style={{ flex: 1, flexDirection: "row", marginBottom: 20 }}>
-            <Thumbnail
+          <View
+            style={{ flexDirection: "row", paddingLeft: 20, paddingRight: 10 }}
+          >
+            <Image
               source={{
                 uri: userInfo.profilePic,
               }}
-              style={{ height: 120, width: 100, flex: 0.5 }}
+              style={{
+                height: 150,
+                width: 150,
+                borderRadius: 120,
+              }}
             />
-            <Body>
+
+            <Body
+              style={{
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
               <Title>
-                <Text style={{ fontSize: 20 }}>{userInfo.userName}</Text>
+                <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+                  {userInfo.userName}
+                </Text>
               </Title>
               <Title>
-                <Text style={{ fontSize: 20 }}>
+                <Text style={{ fontSize: 20, fontWeight: "bold" }}>
                   {userPhotos.length} creations
                 </Text>
               </Title>
-              <Button onPress={signOutWithGoogle}>
-                <Text> Logout </Text>
-              </Button>
             </Body>
-          </Body>
+          </View>
+          <Button style={styles.button} onPress={signOutWithGoogle}>
+            <Title> Logout </Title>
+          </Button>
           <Body>
             <Title>
               <Text style={{ fontSize: 25, fontWeight: "bold" }}>
