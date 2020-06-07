@@ -113,7 +113,11 @@ export default function ChallengeScreen({ route, navigation }) {
   return (
     <Container>
       <Header>
-        <Left></Left>
+        <Left>
+          <Button onPress={() => navigation.goBack()}>
+            <Icon name="md-arrow-back" />
+          </Button>
+        </Left>
         <Body>
           <Title>RecreArt</Title>
         </Body>

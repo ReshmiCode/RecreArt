@@ -176,7 +176,7 @@ export default {
   tabActiveBgColor: "#2c6ca8",
 
   // Header
-  toolbarBtnColor: platform === PLATFORM.IOS ? "#007aff" : "#0e1043",
+  toolbarBtnColor: "#0e1043",
   toolbarDefaultBg: "#2c6ca8",
   toolbarHeight: 56,
   toolbarSearchIconSize: platform === PLATFORM.IOS ? 20 : 23,
