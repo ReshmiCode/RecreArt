@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getPhotos, addPhoto, deletePhoto, getPhoto, getUserPhoto, updatePhoto} = require('../controllers/photo_controller');
+const { getPhotos, addPhoto, deletePhoto, getPhoto, getUserPhoto, updatePhoto, getChallengePhoto} = require('../controllers/photo_controller');
 
 router
     .route('/')
@@ -16,5 +16,9 @@ router
 router
     .route('/user/:id')
     .get(getUserPhoto)
+
+router
+    .route('/challenge/:id')
+    .get(getChallengePhoto)
 
 module.exports = router;

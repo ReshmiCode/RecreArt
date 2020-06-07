@@ -5,6 +5,10 @@ const PhotoSchema = new mongoose.Schema({
         type: String
     },
 
+    challengeID: {
+        type: String
+    },
+
     userPhoto : {
         type: String,
     },

@@ -9,11 +9,14 @@ import { StyleProvider } from "native-base";
 import getTheme from "./native-base-theme/components";
 import commonColor from "./native-base-theme/variables/commonColor";
 
+import LoginScreen from "./screens/LoginScreen";
+
 console.disableYellowBox = true;
 
 const Stack = createStackNavigator();
 
 export default function App(props) {
+  
   const isLoadingComplete = useCachedResources();
 
   if (!isLoadingComplete) {
@@ -25,6 +28,11 @@ export default function App(props) {
           {Platform.OS === "ios" && <StatusBar barStyle="dark-content" />}
           <NavigationContainer>
             <Stack.Navigator>
+              <Stack.Screen
+                name="LogIn"
+                options={{ headerShown: false }}
+                component={LoginScreen}
+              />
               <Stack.Screen name="Root" component={BottomTabNavigator} />
             </Stack.Navigator>
           </NavigationContainer>

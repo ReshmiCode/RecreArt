@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   Container,
   Header,
@@ -9,11 +9,30 @@ import {
   Left,
   Right,
   Icon,
+  Card,
+  CardItem
 } from "native-base";
+import { Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import ChallengeCard from "../components/ChallengeCard";
 
+GLOBAL = require("../global");
+const axios = require("axios").default;
+
 export default function HomeScreen(props) {
+  let [challenges, setChallenges] = useState([]);
+  let [globalChallenge, setGlobalChallenge] = useState({});
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios("https://hack-the-ne.appspot.com/api/v1/challenges");
+      setChallenges(result.data.data);
+      setGlobalChallenge(result.data.data[0]);
+    }
+    fetchData();
+    console.log(challenges)
+  }, []);
+
   return (
     <Container>
       <Header>
@@ -33,21 +52,23 @@ export default function HomeScreen(props) {
           <Body>
             <Title>
               <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-                Daily Challenge
+                Global Challenge
               </Text>
             </Title>
           </Body>
-          <ChallengeCard />
+          <ChallengeCard photo={globalChallenge}/>
           <Body>
             <Title>
               <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-                Weekly Challenges
+                Other Challenges
               </Text>
             </Title>
           </Body>
-          <ChallengeCard />
-          <ChallengeCard />
-          <ChallengeCard />
+          { challenges.reverse().map(function (photo, i) {
+              return (
+                  <ChallengeCard photo={ photo } key={ i }/>
+              );
+          })}
         </Content>
       </LinearGradient>
     </Container>

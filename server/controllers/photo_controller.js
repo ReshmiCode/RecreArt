@@ -38,6 +38,22 @@ exports.addPhoto = async (req, res, next) => {
             console.log(err);
         }
 
+        try {
+            const challenge = await axios.get(
+              `https://hack-the-ne.appspot.com/api/v1/challenges/${photo.challengeID}`
+            );
+            const newPhotos = challenge.data.data.photos;
+            newPhotos.push(photo._id.toString());
+            await axios.patch(
+              `https://hack-the-ne.appspot.com/api/v1/challenges/${photo.challengeID}`,
+              {
+                photos: newPhotos,
+              }
+            );
+        } catch (err) {
+            console.log(err);
+        }
+
         return res.status(201).json({
             success: true,
             data: photo
@@ -118,6 +134,23 @@ exports.deletePhoto = async (req, res, next) => {
             console.log(err);
         }
 
+        try {
+            const challenge = await axios.get(
+              `https://hack-the-ne.appspot.com/api/v1/challenges/${photo.challengeID}`
+            );
+            const newPhotos = challenge.data.data.photos;
+            var index = newPhotos.indexOf(photoToDelete.toString());
+            if (index !== -1) newPhotos.splice(index, 1);
+            await axios.patch(
+              `https://hack-the-ne.appspot.com/api/v1/challenges/${photo.challengeID}`,
+              {
+                photos: newPhotos,
+              }
+            );
+        } catch (err) {
+            console.log(err);
+        }
+
         return res.status(200).json({
             success: true,
             data: photo
@@ -134,6 +167,31 @@ exports.deletePhoto = async (req, res, next) => {
 exports.getUserPhoto = async (req, res, next) => {    
     try {
         const photos = await Photo.find({}).where({ "userID": req.params.id});
+
+        if(!photos){
+            return res.status(404).json({
+                success: false,
+                error: 'No photos found'
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            count: photos.length,
+            data: photos
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            error: 'Server Error'
+        });
+    }
+}
+
+exports.getChallengePhoto = async (req, res, next) => {    
+    try {
+        const photos = await Photo.find({}).where({ "challengeID": req.params.id});
 
         if(!photos){
             return res.status(404).json({
