@@ -29,10 +29,12 @@ const axios = require("axios").default;
 
 var styles = {
   button: {
-    width: 370,
+    width: 100,
     margin: 10,
     justifyContent: "center",
+    alignSelf: "center",
     elevation: 10,
+    borderRadius: 6,
   },
 };
 
@@ -104,9 +106,7 @@ export default function ProfileScreen(props) {
               <Text style={{ fontSize: 30, fontWeight: "bold" }}>Profile</Text>
             </Title>
           </Body>
-          <View
-            style={{ flexDirection: "row", paddingLeft: 20, paddingRight: 10 }}
-          >
+          <View style={{ flexDirection: "row", padding: 8, paddingLeft: 25 }}>
             <Image
               source={{
                 uri: userInfo.profilePic,
@@ -117,11 +117,11 @@ export default function ProfileScreen(props) {
                 borderRadius: 120,
               }}
             />
-
             <Body
               style={{
                 flexDirection: "column",
                 alignItems: "flex-start",
+                padding: 30,
               }}
             >
               <Title>
@@ -139,7 +139,7 @@ export default function ProfileScreen(props) {
           <Button style={styles.button} onPress={signOutWithGoogle}>
             <Title> Logout </Title>
           </Button>
-          <Body>
+          <Body style={{ paddingTop: 15 }}>
             <Title>
               <Text style={{ fontSize: 25, fontWeight: "bold" }}>
                 Your Portfolio

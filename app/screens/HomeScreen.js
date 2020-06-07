@@ -63,7 +63,7 @@ export default function HomeScreen(props) {
             photo={globalChallenge}
             navigation={props.navigation}
           />
-          <Body>
+          <Body style={{ paddingTop: 15 }}>
             <Title>
               <Text style={{ fontSize: 25, fontWeight: "bold" }}>
                 All Challenges
@@ -72,11 +72,7 @@ export default function HomeScreen(props) {
           </Body>
           {challenges.map(function (photo, i) {
             return (
-              <ChallengeCard
-                key={challenges._id}
-                photo={photo}
-                navigation={props.navigation}
-              />
+              <ChallengeCard photo={photo} navigation={props.navigation} />
             );
           })}
         </Content>
