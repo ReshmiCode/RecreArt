@@ -6,13 +6,11 @@ import {
   Body,
   Title,
   Text,
-  Thumbnail,
   Left,
   Right,
   Icon,
   Button,
   View,
-  Thumbnail,
 } from "native-base";
 import { LinearGradient } from "expo-linear-gradient";
 import PortfolioCard from "../components/PortfolioCard";
@@ -107,26 +105,24 @@ export default function ProfileScreen(props) {
               <Text style={{ fontSize: 30, fontWeight: "bold" }}>Profile</Text>
             </Title>
           </Body>
-          <View style={{ flexDirection: "row" }}>
-            <Body style={{ flexDirection: "row" }}>
-              <Image
-                source={{
-                  uri: userInfo.profilePic,
-                }}
-                style={{
-                  height: 150,
-                  width: 150,
-                  borderRadius: 120,
-                }}
-              />
-            </Body>
+          <View
+            style={{ flexDirection: "row", paddingLeft: 20, paddingRight: 10 }}
+          >
+            <Image
+              source={{
+                uri: userInfo.profilePic,
+              }}
+              style={{
+                height: 150,
+                width: 150,
+                borderRadius: 120,
+              }}
+            />
+
             <Body
               style={{
                 flexDirection: "column",
-                flexDirection: "column",
-                justifyContent: "flex-start",
                 alignItems: "flex-start",
-                alignContent: "flex-start",
               }}
             >
               <Title>
