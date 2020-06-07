@@ -8,6 +8,7 @@ import {
   Text,
   Left,
   Right,
+  Spinner,
   Icon,
   Button,
 } from "native-base";
@@ -25,6 +26,7 @@ export default function ChallengeScreen({ route, navigation }) {
   let [image, setImage] = useState(null);
   let [img64, setImg64] = useState(null);
   let [accuracy, setAccuracy] = useState(0);
+  let [loading, setLoading] = useState(false);
 
   const { photo } = route.params;
 
@@ -115,8 +117,8 @@ export default function ChallengeScreen({ route, navigation }) {
   };
 
   const addPhoto = async () => {
+    setLoading(true);
     await cloudinaryUpload();
-    //console.log(image);
     await getAccuracy();
 
     const photoInfo = {
@@ -124,7 +126,7 @@ export default function ChallengeScreen({ route, navigation }) {
       challengeID: photo._id,
       userPhoto: image,
       originalArt: photo.originalArt,
-      accuracy,
+      accuracy: accuracy,
       mode: "default",
       votes: 0,
     };
@@ -132,7 +134,10 @@ export default function ChallengeScreen({ route, navigation }) {
     try {
       axios
         .post(`https://hack-the-ne.appspot.com/api/v1/photos`, photoInfo)
-        .then(() => navigation.navigate("Home"));
+        .then(() => {
+          setLoading(false);
+          navigation.navigate("Home");
+        });
     } catch (err) {
       console.log(err);
     }
@@ -179,7 +184,7 @@ export default function ChallengeScreen({ route, navigation }) {
               </Button>
             </Body>
           </Body>
-          {image && (
+          {image && !loading && (
             <Body style={{ flex: 1, flexDirection: "row" }}>
               <Image
                 source={{ uri: image }}
@@ -188,6 +193,11 @@ export default function ChallengeScreen({ route, navigation }) {
               <Button onPress={addPhoto} transparent>
                 <Icon name="ios-arrow-dropright-circle" />
               </Button>
+            </Body>
+          )}
+          {loading && (
+            <Body style={{ flex: 1, flexDirection: "row" }}>
+              <Spinner color="black" />
             </Body>
           )}
           {photo.photos.map(function (photo, i) {
