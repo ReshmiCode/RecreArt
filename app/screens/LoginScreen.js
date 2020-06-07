@@ -85,7 +85,7 @@ export default function SwiperComponent(props) {
                         profilePic: newUser.profilePic,
                     })
                     .then(function (response) {
-                        console.log(response);
+                        //console.log(response);
                         GLOBAL.databaseID = response.data.data._id;
                     })
                     .catch(function (error) {
