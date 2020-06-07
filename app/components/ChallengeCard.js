@@ -9,7 +9,9 @@ export default function ChallengeCard(props) {
       <CardItem
         cardBody
         button
-        onPress={() => props.navigation.navigate("Challenge")}
+        onPress={() => props.navigation.navigate("Challenge", {
+          photo: props.photo
+        })}
       >
         <Image
           source={{
