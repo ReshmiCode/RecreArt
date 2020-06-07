@@ -2,37 +2,31 @@
   "expo": {
     "name": "RecreArt",
     "slug": "RecreArt",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/paintbrush icon.png",
     "scheme": "myapp",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#a5c0db"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.recreart.app",
       "buildNumber": "1.0.0",
       "backgroundColor": "#abc2a5",
-      "icon": "./assets/images/robot-dev.png",
+      "icon": "./assets/images/paintbrush icon w bkgd.png",
       "supportsTablet": true,
       "usesIcloudStorage": true,
       "splash": {
         "image": "./assets/images/splash.png",
         "resizeMode": "contain",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#a5c0db"
       },
       "config": {
         "googleSignIn": {
@@ -48,7 +42,7 @@
       "versionCode": 1,
       "backgroundColor": "#abc2a5",
       "icon": "./assets/images/favicon.png",
-  
+
       "permissions": [
         "CAMERA",
         "MANAGE_DOCUMENTS",
