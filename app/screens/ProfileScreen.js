@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   Container,
   Header,
@@ -14,6 +14,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import PortfolioCard from "../components/PortfolioCard";
 import * as Google from "expo-google-app-auth";
+import { Image } from "react-native";
 
 import { ANDROID_CLIENT_ID, IOS_CLIENT_ID , ANDROID_APK_CLIENT_ID , IOS_APP_CLIENT_ID} from "../config";
 
@@ -29,6 +30,21 @@ var styles = {
 };
 
 export default function ProfileScreen(props) {
+
+  let [userInfo, setUserInfo] = useState({});
+  let [userPhotos, setUserPhotos] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios(`https://hack-the-ne.appspot.com/api/v1/users/${GLOBAL.googleID}`);
+      setUserInfo(result.data.data[0]);
+      setUserPhotos(result.data.data[0].photos);
+      //console.log("UserInfo");
+    }
+    fetchData();
+    //console.log(userInfo.photos.length);
+  }, []);
+
   const signOutWithGoogle = async () => {
       try {
         const { type, accessToken, user } = await Google.logOutAsync({
@@ -82,16 +98,38 @@ export default function ProfileScreen(props) {
             </Title>
           </Body>
           <Body>
+            <Image
+              source={{
+                uri: userInfo.profilePic,
+              }}
+              style={{ height: 300, width: 300, flex: 1 }}
+            />
+          </Body>
+          <Body>
+            <Title>
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}>{userInfo.userName}</Text>
+            </Title>
+          </Body>
+          <Body>
+          <Title>
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}>{userPhotos.length} creations</Text>
+            </Title>
+          </Body>
+          <Button style={styles.button} onPress={signOutWithGoogle}>
+            <Title> Logout </Title>
+          </Button>
+          <Body>
             <Title>
               <Text style={{ fontSize: 25, fontWeight: "bold" }}>
                 Your Portfolio
               </Text>
             </Title>
           </Body>
-          <PortfolioCard />
-          <Button style={styles.button} onPress={signOutWithGoogle}>
-            <Title> Logout </Title>
-          </Button>
+          { userPhotos.map(function (photo, i) {
+              return (
+                  <PortfolioCard photo={ photo } key={ i }/>
+              );
+          })}
         </Content>
       </LinearGradient>
     </Container>
