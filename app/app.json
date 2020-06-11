@@ -20,7 +20,7 @@
       "bundleIdentifier": "com.recreart.app",
       "buildNumber": "1.0.0",
       "backgroundColor": "#abc2a5",
-      "icon": "./assets/images/paintbrush icon w bkgd.png",
+      "icon": "./assets/images/ios_icon.png",
       "supportsTablet": true,
       "usesIcloudStorage": true,
       "splash": {
@@ -41,7 +41,7 @@
       "package": "com.recreart.app",
       "versionCode": 1,
       "backgroundColor": "#abc2a5",
-      "icon": "./assets/images/favicon.png",
+      "icon": "./assets/images/android_icon.png",
 
       "permissions": [
         "CAMERA",
