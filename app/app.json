@@ -39,7 +39,7 @@
     },
     "android": {
       "package": "com.recreart.app",
-      "versionCode": 2,
+      "versionCode": 3,
       "backgroundColor": "#abc2a5",
       "icon": "./assets/images/android_icon.png",
 
