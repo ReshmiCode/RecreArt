@@ -2,7 +2,7 @@
 
 ## Created By
 
-- [Megan Tran](https://github.com/meganjtran)
+- [Megan Tran](https://play.google.com/store/apps/details?id=com.recreart.app)
 - [Reshmi Ranjith](https://github.com/ReshmiCode)
 - [Saloni Shivdasani](https://github.com/SaloniSS)
 - [Medha Jonnada](https://github.com/medhajon)
