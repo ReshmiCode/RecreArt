@@ -2,14 +2,14 @@
 
 ## Created By
 
-- [Megan Tran](https://play.google.com/store/apps/details?id=com.recreart.app)
+- [Megan Tran](https://github.com/meganjtran)
 - [Reshmi Ranjith](https://github.com/ReshmiCode)
 - [Saloni Shivdasani](https://github.com/SaloniSS)
 - [Medha Jonnada](https://github.com/medhajon)
 
 ## Links
 
-[Store Listing](https://play.google.com/store)   
+[Store Listing](https://play.google.com/store/apps/details?id=com.recreart.app)   
 [Demo Video](https://www.youtube.com/watch?v=z_g37rVeYLQ)  
 [Devpost Submission](https://devpost.com/software/recreart)  
 
