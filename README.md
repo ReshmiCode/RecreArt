@@ -16,6 +16,10 @@
 ## Submission
 Submitted for Hack The Northeast2020
 
+### Awards
+
+Best use of EchoAR
+
 ## Detailed Description
 
 ### Inspiration
